@@ -14,6 +14,7 @@ const db = knex({
 
 let arg = process.argv[2];
 
+//Note the use of "ilike" which is not case sensitive compared to the "like".
 let query = db.select("*").from("famous_people").where("first_name", 'ilike', '%' + arg + '%');
 //This log is to test what is being sent to SQL
 console.log(query.toSQL().sql);
@@ -24,10 +25,6 @@ query.asCallback(function(err, results) {
    console.log(results);
    db.destroy();
 });
-
-// knex('users').where('columnName', 'like', '%rowlikeme%')
-// Outputs:
-// select * from `users` where `columnName` like '%rowlikeme%'
 
 
 
